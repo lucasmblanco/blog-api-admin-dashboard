@@ -1,0 +1,1 @@
+export type SubmitFunction = (e: React.ChangeEvent<HTMLFormElement>) => void;
