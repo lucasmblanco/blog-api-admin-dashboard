@@ -1,5 +1,5 @@
 import React from 'react';
-import { SubmitFunction } from '@/types/submitType';
+import { SubmitFunction } from '@/types';
 
 type FormProps = {
   onSubmit: SubmitFunction;

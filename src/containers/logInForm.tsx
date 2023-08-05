@@ -1,19 +1,18 @@
 'use client';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import BaseForm from '@/components/Form/baseForm';
 import TextField from '@/components/Form/textField';
 import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/homeContext';
-import { UserType } from '@/context/homeContext';
+import { ApiResponse } from '@/types';
+import { Toaster, toast } from 'sonner';
 
-type ApiResponse = {
-  code?: number;
-  message?: string;
-  user: UserType;
-};
-
-export default function LogInForm() {
-  const { state, dispatch } = useContext(UserContext);
+export default function LogInForm({
+  notification
+}: {
+  notification: string | undefined;
+}) {
+  const { dispatch } = useContext(UserContext);
   const router = useRouter();
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,14 +37,25 @@ export default function LogInForm() {
     if (response.status === 200) {
       dispatch({ type: 'SET_USER', payload: userInformation.user });
       router.push('/dashboard');
-    } else {
-      router.refresh();
+    }
+    if (response.status !== 200) {
+      userInformation.errors?.map(e => toast.error(e.error));
     }
   };
+
+  useEffect(() => {
+    if (notification !== null) {
+      toast(notification);
+    }
+  }, [notification]);
+
   return (
-    <BaseForm onSubmit={handleSubmit} submitButtonText="Log in">
-      <TextField inputName="username" type="text" />
-      <TextField inputName="password" type="password" />
-    </BaseForm>
+    <>
+      <BaseForm onSubmit={handleSubmit} submitButtonText="Log in">
+        <TextField inputName="username" type="text" />
+        <TextField inputName="password" type="password" />
+      </BaseForm>
+      <Toaster />
+    </>
   );
 }

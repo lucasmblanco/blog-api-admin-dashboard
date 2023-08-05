@@ -17,11 +17,11 @@ export default function Home() {
 
   const currentView: CurrentViewType = {
     login: {
-      node: <LogInForm />,
+      node: <LogInForm notification={state.notification} />,
       text: SIGN_UP_TEXT
     },
     signup: {
-      node: <SingUpForm />,
+      node: <SingUpForm dispatch={dispatch} />,
       text: LOG_IN_TEXT
     }
   };

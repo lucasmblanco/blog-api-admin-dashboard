@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import BaseForm from '@/components/Form/baseForm';
 import TextField from '@/components/Form/textField';
-import { useRouter } from 'next/navigation';
+import { Toaster, toast } from 'sonner';
+import { ApiResponse, FormActionType } from '@/types';
 
-export default function SingUpForm() {
-  const router = useRouter();
+export default function SingUpForm({
+  dispatch
+}: {
+  dispatch: React.Dispatch<FormActionType>;
+}) {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
@@ -24,16 +28,22 @@ export default function SingUpForm() {
     };
 
     const response = await fetch(endpoint, options);
-
-    if (response.status === 200) {
-      router.refresh();
+    const userInformation: ApiResponse = await response.json();
+    if (response.status !== 200) {
+      userInformation.errors?.map(e => toast.error(e.error));
+    }
+    if (response.status === 201) {
+      dispatch({ type: 'CHANGE_VIEW_FROM_SIGNUP' });
     }
   };
 
   return (
-    <BaseForm onSubmit={handleSubmit} submitButtonText="Sign Up">
-      <TextField inputName="username" type="text" />
-      <TextField inputName="password" type="password" />
-    </BaseForm>
+    <>
+      <BaseForm onSubmit={handleSubmit} submitButtonText="Sign Up">
+        <TextField inputName="username" type="text" />
+        <TextField inputName="password" type="password" />
+      </BaseForm>
+      <Toaster />
+    </>
   );
 }

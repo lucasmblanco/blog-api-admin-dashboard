@@ -1,18 +1,22 @@
 'use client';
 import { createContext, useReducer } from 'react';
-
+import { UserType, ActionType } from '@/types';
+/*
 export type UserType = {
   username: string;
 };
+*/
 
 type StateType = {
   user: UserType | null;
 };
 
+/*
 type ActionType = {
   type: 'SET_USER' | 'LOG_OUT_USER';
   payload: UserType;
 };
+*/
 
 const INITIAL_STATE: StateType = {
   user: null

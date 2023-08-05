@@ -4,5 +4,5 @@ import { UserContext } from '@/context/homeContext';
 
 export default function Dashboard() {
   const { state } = useContext(UserContext);
-  return <div>You are logged in as {state.user?.username} </div>;
+  return <main>You are logged in as {state.user?.username} </main>;
 }

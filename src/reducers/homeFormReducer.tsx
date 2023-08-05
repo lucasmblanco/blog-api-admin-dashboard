@@ -1,25 +1,28 @@
-export type formType = {
+import { FormActionType } from '@/types';
+
+export type FormType = {
   selectedForm: 'login' | 'signup';
+  notification?: string;
 };
 
-export type formActionType = {
-  type: 'CHANGE_VIEW';
-};
-
-export const INITIAL_FORM: formType = {
+export const INITIAL_FORM: FormType = {
   selectedForm: 'login'
 };
 
 export const reducer = (
-  state: formType = INITIAL_FORM,
-  action: formActionType
-): formType => {
+  state: FormType = INITIAL_FORM,
+  action: FormActionType
+): FormType => {
   switch (action.type) {
     case 'CHANGE_VIEW':
       return {
         selectedForm: state.selectedForm == 'login' ? 'signup' : 'login'
       };
-
+    case 'CHANGE_VIEW_FROM_SIGNUP':
+      return {
+        selectedForm: 'login',
+        notification: 'Proceed with the log in.'
+      };
     default:
       return state;
   }
