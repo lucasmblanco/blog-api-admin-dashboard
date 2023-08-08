@@ -35,7 +35,7 @@ export default function LogInForm({
     const response = await fetch(endpoint, options);
     const userInformation: ApiResponse = await response.json();
     if (response.status === 200) {
-      dispatch({ type: 'SET_USER', payload: userInformation.user });
+      dispatch({ type: 'SET_USER_LOG_IN', payload: userInformation.user });
       router.push('/dashboard');
     }
     if (response.status !== 200) {
@@ -44,7 +44,7 @@ export default function LogInForm({
   };
 
   useEffect(() => {
-    if (notification !== null) {
+    if (!notification) {
       toast(notification);
     }
   }, [notification]);

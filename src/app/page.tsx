@@ -1,7 +1,7 @@
 'use client';
 import { useReducer } from 'react';
-import LogInForm from '@/containers/logInForm';
-import SingUpForm from '@/containers/signUpForm';
+import LogInForm from '@/containers/FormContainers/logInForm';
+import SingUpForm from '@/containers/FormContainers/signUpForm';
 import { INITIAL_FORM, reducer } from '@/reducers/homeFormReducer';
 import { LOG_IN_TEXT, SIGN_UP_TEXT } from '@/constants/formView';
 

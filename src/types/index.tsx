@@ -1,8 +1,8 @@
 export type SubmitFunction = (e: React.ChangeEvent<HTMLFormElement>) => void;
 
 export type ActionType = {
-  type: 'SET_USER' | 'LOG_OUT_USER';
-  payload?: UserType;
+  type: 'SET_USER_LOG_IN' | 'LOG_OUT_USER' | 'SET_USER_LOCAL';
+  payload: UserType;
 };
 
 export type UserType = {
@@ -18,6 +18,6 @@ export type ResponseError = { error: string };
 export type ApiResponse = {
   code: number;
   message: string;
-  user?: UserType;
+  user: UserType;
   errors?: ResponseError[];
 };

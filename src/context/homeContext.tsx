@@ -1,25 +1,13 @@
 'use client';
 import { createContext, useReducer } from 'react';
 import { UserType, ActionType } from '@/types';
-/*
-export type UserType = {
-  username: string;
-};
-*/
 
 type StateType = {
-  user: UserType | null;
+  user: UserType | undefined;
 };
-
-/*
-type ActionType = {
-  type: 'SET_USER' | 'LOG_OUT_USER';
-  payload: UserType;
-};
-*/
 
 const INITIAL_STATE: StateType = {
-  user: null
+  user: undefined
 };
 
 export const UserContext = createContext<{
@@ -31,7 +19,10 @@ export const UserContext = createContext<{
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer<React.Reducer<StateType, ActionType>>(
+    reducer,
+    INITIAL_STATE
+  );
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       {children}
@@ -41,7 +32,17 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
 const reducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
-    case 'SET_USER':
+    case 'SET_USER_LOG_IN':
+      const user = {
+        username: action.payload.username
+      };
+      localStorage.setItem('user', JSON.stringify(user));
+      return {
+        user: {
+          username: action.payload.username
+        }
+      };
+    case 'SET_USER_LOCAL':
       return {
         user: {
           username: action.payload.username
@@ -49,7 +50,7 @@ const reducer = (state: StateType, action: ActionType) => {
       };
     case 'LOG_OUT_USER':
       return {
-        user: null
+        user: undefined
       };
     default:
       return state;
