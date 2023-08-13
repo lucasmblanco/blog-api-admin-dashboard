@@ -4,6 +4,7 @@ import HeaderContainer from '@/containers/HeaderContainers/HeaderContainer';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { PostContext } from '@/context/PostContext';
 
 const queryClient = new QueryClient();
 

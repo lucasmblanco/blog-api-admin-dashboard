@@ -2,14 +2,32 @@ import React, { useContext, useState } from 'react';
 import PostForm from './PostForm';
 import Post from './Post';
 import { PostContext } from '@/context/PostContext';
+import { PostComponentType } from '@/types';
 
 type CurrentViewType = {
   [key: string]: React.ReactNode;
 };
 
-export default function PostDialog() {
-  const { state } = useContext(PostContext);
-  const [currentView, setCurrentView] = useState('post');
+const viewController = (
+  state: PostComponentType,
+  currentView: string
+): string => {
+  return state.currentView ? state.currentView : currentView;
+};
+
+export default function PostDialog({
+  view = 'form',
+  hideFormButton,
+  dialogStatus,
+  dialogControl
+}: {
+  view?: string;
+  hideFormButton?: boolean;
+  dialogStatus?: boolean;
+  dialogControl?: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const { state, dispatch } = useContext(PostContext);
+  const [currentView, setCurrentView] = useState(state.currentView || view);
 
   const views: CurrentViewType = {
     post: <Post />,
@@ -17,20 +35,26 @@ export default function PostDialog() {
   };
 
   return (
-    <dialog open={state.isDialogOpen}>
+    <dialog open={state.isDialogOpen || dialogStatus}>
       <button
         onClick={() =>
-          setCurrentView(prev => (prev === 'post' ? 'form' : 'post'))
+          dialogControl?.(false) || dispatch({ type: 'TOGGLE_DIALOG' })
         }
       >
-        Form
+        CLOSE
       </button>
-      {views[currentView]}
+      {!hideFormButton && (
+        <button
+          onClick={() =>
+            dispatch
+              ? dispatch({ type: 'CHANGE_VIEW' })
+              : setCurrentView(prev => (prev === 'post' ? 'form' : 'post'))
+          }
+        >
+          Form
+        </button>
+      )}
+      {views[viewController(state, currentView)]}
     </dialog>
   );
 }
-/*
- {bodyContent.map((part, index) => (
-        <p key={index}>{part}</p>
-      ))}
-*/

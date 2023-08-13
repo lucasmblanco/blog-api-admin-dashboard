@@ -21,3 +21,10 @@ export type ApiResponse = {
   user: UserType;
   errors?: ResponseError[];
 };
+
+export type PostComponentType = {
+  title: string | undefined;
+  body: string | undefined;
+  isDialogOpen?: boolean;
+  currentView?: string;
+};

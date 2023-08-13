@@ -1,11 +1,6 @@
 'use client';
 import { createContext, useReducer } from 'react';
-
-type PostComponentType = {
-  title: string | undefined;
-  body: string | undefined;
-  isDialogOpen?: boolean;
-};
+import { PostComponentType } from '@/types';
 
 type ActionPostComponentType = {
   type: string;
@@ -15,7 +10,8 @@ type ActionPostComponentType = {
 const INITIAL_STATE: PostComponentType = {
   title: undefined,
   body: undefined,
-  isDialogOpen: false
+  isDialogOpen: false,
+  currentView: undefined
 };
 
 export const PostContext = createContext<{
@@ -36,7 +32,13 @@ const reducer = (state: PostComponentType, action: ActionPostComponentType) => {
     case 'TOGGLE_DIALOG':
       return {
         ...state,
-        isDialogOpen: !state.isDialogOpen
+        isDialogOpen: !state.isDialogOpen,
+        currentView: 'post'
+      };
+    case 'CHANGE_VIEW':
+      return {
+        ...state,
+        currentView: state.currentView !== 'post' ? 'post' : 'form'
       };
     default:
       return state;
