@@ -2,8 +2,8 @@
 import { useReducer } from 'react';
 import LogInForm from '@/containers/FormContainers/logInForm';
 import SingUpForm from '@/containers/FormContainers/signUpForm';
-import { INITIAL_FORM, reducer } from '@/reducers/homeFormReducer';
-import { LOG_IN_TEXT, SIGN_UP_TEXT } from '@/constants/formView';
+import { INITIAL_FORM, reducer } from '@/reducers/AuthenticationReducer.js';
+import { LOG_IN_TEXT, SIGN_UP_TEXT } from '@/constants/FormOptions';
 
 type CurrentViewType = {
   [key: string]: {

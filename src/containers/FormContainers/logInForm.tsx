@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import BaseForm from '@/components/Form/baseForm';
 import TextField from '@/components/Form/textField';
 import { useRouter } from 'next/navigation';
-import { UserContext } from '@/context/homeContext';
+import { UserContext } from '@/context/UserContext';
 import { ApiResponse } from '@/types';
 import { Toaster, toast } from 'sonner';
 
@@ -14,6 +14,7 @@ export default function LogInForm({
 }) {
   const { dispatch } = useContext(UserContext);
   const router = useRouter();
+
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
@@ -24,8 +25,9 @@ export default function LogInForm({
     const JSONdata = JSON.stringify(data);
 
     const endpoint = 'https://blog-api-ol7v.onrender.com/v1/admin/login';
-    const options = {
+    const options: RequestInit = {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -35,8 +37,8 @@ export default function LogInForm({
     const response = await fetch(endpoint, options);
     const userInformation: ApiResponse = await response.json();
     if (response.status === 200) {
-      dispatch({ type: 'SET_USER_LOG_IN', payload: userInformation.user });
       router.push('/dashboard');
+      dispatch({ type: 'SET_USER_LOG_IN', payload: userInformation.user });
     }
     if (response.status !== 200) {
       userInformation.errors?.map(e => toast.error(e.error));

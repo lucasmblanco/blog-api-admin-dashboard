@@ -1,9 +1,13 @@
 'use client';
 import React from 'react';
 
-export default function AddNewPostButton() {
+export default function AddNewPostButton({
+  onClick
+}: {
+  onClick: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const handleClick = function () {
-    console.log('ADD POST');
+    onClick(true);
   };
   return (
     <div>

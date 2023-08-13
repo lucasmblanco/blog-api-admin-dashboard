@@ -1,4 +1,4 @@
-import { UserContext } from '@/context/homeContext';
+import { UserContext } from '@/context/UserContext';
 import React, { useContext, useReducer } from 'react';
 
 export default function LoggedUser() {
