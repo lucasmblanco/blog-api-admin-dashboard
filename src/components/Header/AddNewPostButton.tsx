@@ -1,13 +1,12 @@
 'use client';
-import React from 'react';
+import React, { useContext } from 'react';
+import { DialogContext } from '@/context/DialogContext';
 
-export default function AddNewPostButton({
-  onClick
-}: {
-  onClick: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function AddNewPostButton() {
+  const { dispatch } = useContext(DialogContext);
+
   const handleClick = function () {
-    onClick(true);
+    dispatch({ type: 'TOGGLE_DIALOG_DEFAULT' });
   };
   return (
     <div>

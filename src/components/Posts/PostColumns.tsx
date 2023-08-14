@@ -9,7 +9,6 @@ type PostType = {
   body: string;
   published: boolean;
   timestamp: string;
-  __v: number;
 };
 
 export default function PostColumns({
@@ -26,6 +25,10 @@ export default function PostColumns({
       <h2>{title}</h2>
       {data.posts
         .filter((post: PostType) => post.published === published)
+        .sort(
+          (a: PostType, b: PostType) =>
+            Number(new Date(b.timestamp)) - Number(new Date(a.timestamp))
+        )
         .map((post: PostType) => (
           <PostProvider key={post._id}>
             <PostContainer postData={post} />

@@ -6,6 +6,11 @@ import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/UserContext';
 import { ApiResponse } from '@/types';
 import { Toaster, toast } from 'sonner';
+import axios from 'axios';
+
+type Error = {
+  error: string;
+};
 
 export default function LogInForm({
   notification
@@ -21,6 +26,27 @@ export default function LogInForm({
       username: e.target.username.value,
       password: e.target.password.value
     };
+
+    const response = await axios.post(
+      'https://blog-api-ol7v.onrender.com/v1/admin/login',
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    if (response.status === 200) {
+      router.push('/dashboard');
+      dispatch({ type: 'SET_USER_LOG_IN', payload: response.data.user });
+    }
+    if (response.status !== 200) {
+      response.data.errors?.map((e: Error) => toast.error(e.error));
+    }
+    /*
+    
+    
 
     const JSONdata = JSON.stringify(data);
 
@@ -43,6 +69,7 @@ export default function LogInForm({
     if (response.status !== 200) {
       userInformation.errors?.map(e => toast.error(e.error));
     }
+    */
   };
 
   useEffect(() => {

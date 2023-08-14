@@ -1,69 +1,104 @@
 'use client';
 import React, { useContext, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-//import { ApiResponse } from '@/types';
 import { PostContext } from '@/context/PostContext';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { DialogContext } from '@/context/DialogContext';
 
-type FormProps = {
-  title?: string;
-  body?: string;
-};
-
-async function createPost({ title, body }: { title: string; body: string }) {
+async function createPost({
+  title,
+  body,
+  published
+}: {
+  title: string;
+  body: string;
+  published: boolean;
+}) {
+  const data = {
+    title: title,
+    body: body,
+    published: published
+  };
   return axios
-    .post('https://blog-api-ol7v.onrender.com/v1/posts/', {
-      title,
-      body
+    .post('https://blog-api-ol7v.onrender.com/v1/posts/', data, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+    .then(res => res.data);
+}
+
+async function editPost({
+  id,
+  title,
+  body,
+  published,
+  timestamp
+}: {
+  id: string;
+  title: string;
+  body: string;
+  published: boolean;
+  timestamp?: string;
+}) {
+  const data = {
+    title: title,
+    body: body,
+    published: published,
+    timestamp: timestamp
+  };
+  return axios
+    .put(`https://blog-api-ol7v.onrender.com/v1/posts/${id}`, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
     })
     .then(res => res.data);
 }
 
 export default function PostForm() {
-  const { state, dispatch } = useContext(PostContext);
+  const { state } = useContext(PostContext);
+  const { dispatch } = useContext(DialogContext);
   const [title, setTitle] = useState(state.title || '');
   const [body, setBody] = useState(state.body || '');
+  const [published, setPublished] = useState(state.published || false);
+  const [newTimestamp, setNewTimestamp] = useState(false);
+  const queryClient = useQueryClient();
   const createPostMutation = useMutation({
-    mutationFn: createPost
+    mutationFn: createPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['posts']);
+    }
   });
 
-  const handleSubmit = async function () {
-    createPostMutation.mutate({
-      title: title,
-      body: body
-    });
-    /*
+  const editPostMutation = useMutation({
+    mutationFn: editPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['posts']);
+    }
+  });
+  const handleSubmit = async function (e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    const post = {
-      // title: newTitle,
-      //body: newBody
-    };
-    const JSONdata = JSON.stringify(post);
-
-    const endpoint = 'https://blog-api-ol7v.onrender.com/v1/posts/';
-    const options: RequestInit = {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSONdata
-    };
-    const response = await fetch(endpoint, options);
-    //const userInformation: ApiResponse = await response.json();
-    if (response.status === 201) {
-      console.log('funcionaaaaaaaa');
+    if (state.id === '') {
+      createPostMutation.mutate({
+        title: title,
+        body: body,
+        published: published
+      });
+    } else {
+      editPostMutation.mutate({
+        id: state.id,
+        title: title,
+        body: body,
+        published: published,
+        timestamp: !newTimestamp ? state.timestamp : undefined
+      });
     }
-    if (response.status !== 201) {
-      //userInformation.errors?.map(e => toast.error(e.error));
-
-      console.log('no funciona');
-    }
-    */
+    dispatch({ type: 'TOGGLE_DIALOG_DEFAULT' });
   };
-
-  // const [newBodyValue, setNewBodyValue] = useState(body);
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -91,6 +126,22 @@ export default function PostForm() {
             value={body}
           />
         </div>
+        <label htmlFor="published">Published</label>
+        <input
+          type="checkbox"
+          name="published"
+          id="published"
+          checked={published}
+          onChange={e => setPublished(e.target.checked)}
+        />
+        <label htmlFor="newTimestamp">Update timestamp?</label>
+        <input
+          type="checkbox"
+          name="newTimestamp"
+          id="newTimestamp"
+          checked={newTimestamp}
+          onChange={e => setNewTimestamp(e.target.checked)}
+        />
         <button type="submit">Save Post</button>
       </form>
     </>

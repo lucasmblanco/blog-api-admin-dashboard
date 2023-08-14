@@ -23,8 +23,14 @@ export type ApiResponse = {
 };
 
 export type PostComponentType = {
-  title: string | undefined;
-  body: string | undefined;
+  id: string;
+  title: string;
+  body: string;
+  timestamp: string;
+  published: boolean;
+};
+
+export type DialogComponentType = {
   isDialogOpen?: boolean;
-  currentView?: string;
+  currentView: string;
 };

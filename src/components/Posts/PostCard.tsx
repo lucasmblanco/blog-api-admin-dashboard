@@ -1,9 +1,11 @@
 'use client';
 import React, { useContext } from 'react';
 import { PostContext } from '@/context/PostContext';
+import { DialogContext } from '@/context/DialogContext';
 
 export default function PostCard() {
-  const { state, dispatch } = useContext(PostContext);
+  const { state } = useContext(PostContext);
+  const { dispatch } = useContext(DialogContext);
   return (
     <>
       <div

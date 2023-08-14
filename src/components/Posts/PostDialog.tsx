@@ -1,60 +1,39 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PostForm from './PostForm';
 import Post from './Post';
-import { PostContext } from '@/context/PostContext';
-import { PostComponentType } from '@/types';
+import { DialogContext } from '@/context/DialogContext';
+
+const views: CurrentViewType = {
+  post: <Post />,
+  form: <PostForm />
+};
 
 type CurrentViewType = {
   [key: string]: React.ReactNode;
 };
 
-const viewController = (
-  state: PostComponentType,
-  currentView: string
-): string => {
-  return state.currentView ? state.currentView : currentView;
-};
-
 export default function PostDialog({
-  view = 'form',
-  hideFormButton,
-  dialogStatus,
-  dialogControl
+  hideFormButton
 }: {
-  view?: string;
   hideFormButton?: boolean;
-  dialogStatus?: boolean;
-  dialogControl?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { state, dispatch } = useContext(PostContext);
-  const [currentView, setCurrentView] = useState(state.currentView || view);
+  const { state, dispatch } = useContext(DialogContext);
 
-  const views: CurrentViewType = {
-    post: <Post />,
-    form: <PostForm />
-  };
+  function handleButton() {
+    dispatch({ type: 'TOGGLE_DIALOG_DEFAULT' });
+  }
+
+  useEffect(() => {
+    if (hideFormButton) dispatch({ type: 'SELECT_FORM_VIEW' });
+  }, []);
 
   return (
-    <dialog open={state.isDialogOpen || dialogStatus}>
-      <button
-        onClick={() =>
-          dialogControl?.(false) || dispatch({ type: 'TOGGLE_DIALOG' })
-        }
-      >
-        CLOSE
-      </button>
+    <dialog open={state.isDialogOpen}>
+      <button onClick={handleButton}>CLOSE</button>
       {!hideFormButton && (
-        <button
-          onClick={() =>
-            dispatch
-              ? dispatch({ type: 'CHANGE_VIEW' })
-              : setCurrentView(prev => (prev === 'post' ? 'form' : 'post'))
-          }
-        >
-          Form
-        </button>
+        <button onClick={() => dispatch({ type: 'CHANGE_VIEW' })}>Form</button>
       )}
-      {views[viewController(state, currentView)]}
+      {views[state.currentView]}
     </dialog>
   );
 }

@@ -8,10 +8,11 @@ type ActionPostComponentType = {
 };
 
 const INITIAL_STATE: PostComponentType = {
-  title: undefined,
-  body: undefined,
-  isDialogOpen: false,
-  currentView: undefined
+  id: '',
+  title: '',
+  body: '',
+  timestamp: '',
+  published: false
 };
 
 export const PostContext = createContext<{
@@ -27,19 +28,12 @@ const reducer = (state: PostComponentType, action: ActionPostComponentType) => {
     case 'ADD_DATA':
       return {
         title: action.payload.title,
-        body: action.payload.body
+        body: action.payload.body,
+        id: action.payload._id,
+        published: action.payload.published,
+        timestamp: action.payload.timestamp
       };
-    case 'TOGGLE_DIALOG':
-      return {
-        ...state,
-        isDialogOpen: !state.isDialogOpen,
-        currentView: 'post'
-      };
-    case 'CHANGE_VIEW':
-      return {
-        ...state,
-        currentView: state.currentView !== 'post' ? 'post' : 'form'
-      };
+
     default:
       return state;
   }
@@ -55,3 +49,4 @@ export const PostProvider = ({ children }: { children: React.ReactNode }) => {
     </PostContext.Provider>
   );
 };
+
