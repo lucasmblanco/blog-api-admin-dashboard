@@ -115,7 +115,7 @@ export default function PostForm() {
         <div>
           <label htmlFor="body">Body</label>
           <Editor
-            apiKey="bplbmwbo815j4k30nz2swp2hkiv7zn54adf1u0zl3xadjs7j"
+            apiKey={process.env.TINY_API_KEY}
             onEditorChange={newValue => {
               setBody(newValue);
             }}
