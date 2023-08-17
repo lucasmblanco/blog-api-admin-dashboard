@@ -1,2 +1,2 @@
-export const LOG_IN_TEXT = 'or log in';
-export const SIGN_UP_TEXT = 'or sign up';
+export const LOG_IN_TEXT = 'Log In';
+export const SIGN_UP_TEXT = 'Sign Up';

@@ -40,8 +40,8 @@ export default function SingUpForm({
   return (
     <>
       <BaseForm onSubmit={handleSubmit} submitButtonText="Sign Up">
-        <TextField inputName="username" type="text" />
-        <TextField inputName="password" type="password" />
+        <TextField inputName="Username" type="text" />
+        <TextField inputName="Password" type="password" />
       </BaseForm>
       <Toaster />
     </>

@@ -8,12 +8,12 @@ import { DialogProvider } from '@/context/DialogContext';
 export default function PostContainer({ postData }: any) {
   const { state, dispatch } = useContext(PostContext);
   useEffect(() => {
-   // console.log(postData)
+    // console.log(postData)
     dispatch({
       type: 'ADD_DATA',
       payload: postData
     });
-  }, [postData]);
+  }, [dispatch, postData]);
   return (
     <>
       <DialogProvider>

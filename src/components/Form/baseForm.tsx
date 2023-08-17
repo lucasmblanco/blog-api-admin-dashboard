@@ -9,9 +9,14 @@ type FormProps = {
 
 export default function BaseForm(props: FormProps) {
   return (
-    <form onSubmit={props.onSubmit}>
+    <form onSubmit={props.onSubmit} className="flex flex-col gap-8">
       {props.children}
-      <button type="submit">{props.submitButtonText}</button>
+      <button
+        type="submit"
+        className="bg-gradient-to-bl from-beige to-tan p-2 text-black-brown font-bold rounded-full hover:opacity-90"
+      >
+        {props.submitButtonText}
+      </button>
     </form>
   );
 }

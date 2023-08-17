@@ -71,18 +71,18 @@ export default function LogInForm({
     }
     */
   };
-
+/*
   useEffect(() => {
     if (!notification) {
       toast(notification);
     }
   }, [notification]);
-
+*/
   return (
     <>
       <BaseForm onSubmit={handleSubmit} submitButtonText="Log in">
-        <TextField inputName="username" type="text" />
-        <TextField inputName="password" type="password" />
+        <TextField inputName="Username" type="text" />
+        <TextField inputName="Password" type="password" />
       </BaseForm>
       <Toaster />
     </>

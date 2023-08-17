@@ -73,7 +73,6 @@ export default function PostForm() {
       queryClient.invalidateQueries(['posts']);
     }
   });
-
   const editPostMutation = useMutation({
     mutationFn: editPost,
     onSuccess: () => {
@@ -99,6 +98,7 @@ export default function PostForm() {
     }
     dispatch({ type: 'TOGGLE_DIALOG_DEFAULT' });
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -115,13 +115,14 @@ export default function PostForm() {
         <div>
           <label htmlFor="body">Body</label>
           <Editor
-            apiKey={process.env.TINY_API_KEY}
+            apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
             onEditorChange={newValue => {
               setBody(newValue);
             }}
             init={{
               id: 'body',
               textareaName: 'body'
+              //entity_encoding: 'raw'
             }}
             value={body}
           />
