@@ -4,6 +4,8 @@ import React from 'react';
 type textTypes = {
   inputName: string;
   type: string;
+  setFunction?: (e: string) => void;
+  value?: string;
 };
 
 export default function TextField(props: textTypes) {
@@ -13,8 +15,10 @@ export default function TextField(props: textTypes) {
         type={props.type}
         id={props.inputName.toLowerCase()}
         name={props.inputName.toLowerCase()}
+        onChange={e => props.setFunction?.(e.target.value)}
         className="block peer bg-transparent border-0 border-b-[1px] border-beige focus:outline-none focus:ring-0 py-2 px-2"
         placeholder=""
+        value={props.value}
       />
       <label
         htmlFor={props.inputName.toLowerCase()}

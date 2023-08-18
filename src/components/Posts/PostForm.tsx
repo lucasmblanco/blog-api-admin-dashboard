@@ -5,6 +5,8 @@ import { PostContext } from '@/context/PostContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { DialogContext } from '@/context/DialogContext';
+import TextField from '../Form/textField';
+import CheckBoxButton from '../Form/CheckBoxButton';
 
 async function createPost({
   title,
@@ -64,7 +66,7 @@ export default function PostForm() {
   const { dispatch } = useContext(DialogContext);
   const [title, setTitle] = useState(state.title || '');
   const [body, setBody] = useState(state.body || '');
-  const [published, setPublished] = useState(state.published || false);
+  const [publish, SetPublish] = useState(state.published || false);
   const [newTimestamp, setNewTimestamp] = useState(false);
   const queryClient = useQueryClient();
   const createPostMutation = useMutation({
@@ -85,14 +87,14 @@ export default function PostForm() {
       createPostMutation.mutate({
         title: title,
         body: body,
-        published: published
+        published: publish
       });
     } else {
       editPostMutation.mutate({
         id: state.id,
         title: title,
         body: body,
-        published: published,
+        published: publish,
         timestamp: !newTimestamp ? state.timestamp : undefined
       });
     }
@@ -104,21 +106,14 @@ export default function PostForm() {
       onSubmit={handleSubmit}
       className="flex flex-col p-2 gap-4 grow justify-around"
     >
-      <div>
-        <label htmlFor="title" className="font-bold">
-          Title
-        </label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          className="focus:outline-none focus:ring-0 border-0 border-b-[1px] border-beige w-full  bg-black-brown"
-        />
-      </div>
+      <TextField
+        inputName="Title"
+        type="text"
+        setFunction={setTitle}
+        value={title}
+      />
       <div className="flex flex-col gap-2">
-        <label htmlFor="body" className="font-bold">
+        <label htmlFor="body" className="opacity-50 px-2">
           Body
         </label>
         <Editor
@@ -133,8 +128,48 @@ export default function PostForm() {
           value={body}
         />
       </div>
-      <div className="flex flex-col grow">
-        <div>
+      <div className="flex flex-col grow justify-center">
+        <CheckBoxButton
+          name="Publish?"
+          initialState={publish}
+          setFunction={SetPublish}
+          complexName={true}
+        />
+        <CheckBoxButton
+          name="Update timestamp?"
+          initialState={newTimestamp}
+          setFunction={setNewTimestamp}
+          complexName={true}
+        />
+      </div>
+      <div className="flex justify-center p-2">
+        <button
+          type="submit"
+          className="font-bold text-sm text-beige border border-beige px-4 py-1 mx-2 rounded-full hover:bg-beige hover:text-black-brown hover:border-light-beige"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  );
+}
+
+/*
+ <div>
+        <label htmlFor="title" className="font-bold">
+          Title
+        </label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          className="focus:outline-none focus:ring-0 border-0 border-b-[1px] border-beige w-full bg-black-brown"
+        />
+      </div>
+
+ <div>
           <label htmlFor="published">Published</label>
           <input
             type="checkbox"
@@ -155,9 +190,5 @@ export default function PostForm() {
             onChange={e => setNewTimestamp(e.target.checked)}
           />
         </div>
-      </div>
 
-      <button type="submit">Save Post</button>
-    </form>
-  );
-}
+      */

@@ -34,7 +34,7 @@ export default function PostColumns({
         </svg>
         <h2 className="font-bold">{`${title} (${filteredData.length})`} </h2>
       </div>
-      <div className="grid gap-4">
+      <div className="grid gap-4 max-h-[100vh] overflow-y-scroll">
         {filteredData.map((post: PostType) => (
           <PostProvider key={post._id}>
             <PostContainer postData={post} />

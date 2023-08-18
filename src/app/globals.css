@@ -53,8 +53,10 @@
 body {
   color: var(--font-color);
   background: var(--background-color);
-  /*
+  
   display: grid;
+  overflow-y: hidden;
+   /*
   align-items: center;
   align-content:flex-start;
   */

@@ -14,6 +14,7 @@ module.exports = {
       },
       colors: {
         beige: 'hsl(32, 45%, 76%)',
+        'light-beige': 'hsla(32, 45%, 95%, 1)',
         'black-brown': 'hsl(300, 3%, 12%)',
         tan: 'hsl(31, 65%, 65%)',
         'light-brown': 'hsl(300, 5%, 17%)',
