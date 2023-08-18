@@ -69,15 +69,16 @@ export default function LogInForm({
     if (response.status !== 200) {
       userInformation.errors?.map(e => toast.error(e.error));
     }
-    */
-  };
-/*
+
+    /*
   useEffect(() => {
     if (!notification) {
       toast(notification);
     }
   }, [notification]);
 */
+  };
+
   return (
     <>
       <BaseForm onSubmit={handleSubmit} submitButtonText="Log in">

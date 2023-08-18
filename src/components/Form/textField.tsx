@@ -11,14 +11,14 @@ export default function TextField(props: textTypes) {
     <div className="flex flex-col">
       <input
         type={props.type}
-        id={props.inputName}
-        name={props.inputName}
-        className="block peer bg-transparent border-b-[1px] border-beige focus:outline-none focus:ring-0 py-2"
+        id={props.inputName.toLowerCase()}
+        name={props.inputName.toLowerCase()}
+        className="block peer bg-transparent border-0 border-b-[1px] border-beige focus:outline-none focus:ring-0 py-2 px-2"
         placeholder=""
       />
       <label
-        htmlFor={props.inputName}
-        className="py-2 absolute opacity-50 duration-300 -translate-y-6 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100"
+        htmlFor={props.inputName.toLowerCase()}
+        className="absolute py-2 px-2 opacity-50 duration-300 transform -translate-y-6 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 "
       >
         {props.inputName}
       </label>

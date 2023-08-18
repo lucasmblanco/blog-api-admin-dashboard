@@ -100,51 +100,64 @@ export default function PostForm() {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col p-2 gap-4 grow justify-around"
+    >
+      <div>
+        <label htmlFor="title" className="font-bold">
+          Title
+        </label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          className="focus:outline-none focus:ring-0 border-0 border-b-[1px] border-beige w-full  bg-black-brown"
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="body" className="font-bold">
+          Body
+        </label>
+        <Editor
+          apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
+          onEditorChange={newValue => {
+            setBody(newValue);
+          }}
+          init={{
+            id: 'body',
+            textareaName: 'body'
+          }}
+          value={body}
+        />
+      </div>
+      <div className="flex flex-col grow">
         <div>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="published">Published</label>
           <input
-            type="text"
-            id="title"
-            name="title"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
+            type="checkbox"
+            name="published"
+            id="published"
+            checked={published}
+            onChange={e => setPublished(e.target.checked)}
+            className="appareance-none bg-black-brown focus:outline-none focus:ring-tan focus:bg-tan checked:ring-0 checked:outline-none rounded"
           />
         </div>
         <div>
-          <label htmlFor="body">Body</label>
-          <Editor
-            apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
-            onEditorChange={newValue => {
-              setBody(newValue);
-            }}
-            init={{
-              id: 'body',
-              textareaName: 'body'
-              //entity_encoding: 'raw'
-            }}
-            value={body}
+          <label htmlFor="newTimestamp">Update timestamp?</label>
+          <input
+            type="checkbox"
+            name="newTimestamp"
+            id="newTimestamp"
+            checked={newTimestamp}
+            onChange={e => setNewTimestamp(e.target.checked)}
           />
         </div>
-        <label htmlFor="published">Published</label>
-        <input
-          type="checkbox"
-          name="published"
-          id="published"
-          checked={published}
-          onChange={e => setPublished(e.target.checked)}
-        />
-        <label htmlFor="newTimestamp">Update timestamp?</label>
-        <input
-          type="checkbox"
-          name="newTimestamp"
-          id="newTimestamp"
-          checked={newTimestamp}
-          onChange={e => setNewTimestamp(e.target.checked)}
-        />
-        <button type="submit">Save Post</button>
-      </form>
-    </>
+      </div>
+
+      <button type="submit">Save Post</button>
+    </form>
   );
 }

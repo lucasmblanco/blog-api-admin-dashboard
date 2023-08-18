@@ -3,7 +3,9 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
+    //'./src/components/Posts/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/containers/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
     extend: {
@@ -13,7 +15,10 @@ module.exports = {
       colors: {
         beige: 'hsl(32, 45%, 76%)',
         'black-brown': 'hsl(300, 3%, 12%)',
-        tan: 'hsl(31, 65%, 65%)'
+        tan: 'hsl(31, 65%, 65%)',
+        'light-brown': 'hsl(300, 5%, 17%)',
+        'light-yellow': 'hsl(25, 75%, 97%)',
+        'soft-brown': 'hsl(300, 2%, 40%)'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -22,5 +27,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwindcss-animated')]
+  plugins: [require('tailwindcss-animated'), require('@tailwindcss/forms')]
 };

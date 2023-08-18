@@ -1,10 +1,10 @@
 'use client';
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
-import HeaderContainer from '@/containers/HeaderContainers/HeaderContainer';
+import HeaderContainer from '@/containers/HeaderContainer';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { PostContext } from '@/context/PostContext';
+//import { PostContext } from '@/context/PostContext';
 
 const queryClient = new QueryClient();
 
@@ -32,17 +32,16 @@ export default function DashboardLayout(props: {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <main>
+      <>
         {loading ? (
           <div>Veryfing..........</div>
         ) : (
           <>
             <HeaderContainer />
             {props.posts}
-            {props.children}
           </>
         )}
-      </main>
+      </>
     </QueryClientProvider>
   );
 }

@@ -10,7 +10,12 @@ export default function AddNewPostButton() {
   };
   return (
     <div>
-      <button onClick={handleClick}>+</button>
+      <button
+        onClick={handleClick}
+        className="font-bold ext-sm border border-black-brown px-4 py-1 mx-2 rounded-full"
+      >
+        New
+      </button>
     </div>
   );
 }

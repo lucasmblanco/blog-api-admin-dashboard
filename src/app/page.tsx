@@ -39,45 +39,36 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center">
-      <div className="flex flex-col items-center p-5">
-        <h1 className="font-extrabold tracking-wider text-2xl animate-once animate-duration-[1000ms] animate-ease-linear whitespace-pre-wrap">
-          {currentView[state.selectedForm].mainText}
-        </h1>
-        <figure>
-          <Image
-            src={currentView[state.selectedForm].emoji}
-            alt="Waving hand emoji"
-            className="animate-wiggle-more animate-infinite bg-beige p-1 border rounded-full"
-          />
-        </figure>
-        {currentView[state.selectedForm].node}
-      </div>
-      <div className="flex gap-1">
-        <span>{currentView[state.selectedForm].linkMessage}</span>
+    <>
+      <main className="flex flex-col items-center">
+        <div className="flex flex-col items-center p-5 gap-8">
+          <h1 className="max-w-[16rem] min-h-[5rem] text-center font-bold tracking-wider text-3xl animate-fade animate-duration-[1000ms] animate-ease-linear ">
+            {currentView[state.selectedForm].mainText}
+          </h1>
+
+          <figure>
+            <Image
+              src={currentView[state.selectedForm].emoji}
+              alt="Waving hand emoji"
+              className="animate-wiggle-more animate-infinite bg-beige p-1 border rounded-full"
+            />
+          </figure>
+          {currentView[state.selectedForm].node}
+        </div>
+      </main>
+      <div className="flex mt-auto justify-center">
+        <span className="p-1">
+          {currentView[state.selectedForm].linkMessage}
+        </span>
         <button
           onClick={() => {
             dispatch({ type: 'CHANGE_VIEW' });
           }}
-          className="font-bold text-center"
+          className="font-bold text-center px-1 hover:text-black-brown hover:bg-beige hover:rounded-full active:text-black-brown active:bg-beige active:rounded-full"
         >
           {currentView[state.selectedForm].text}
         </button>
       </div>
-    </main>
+    </>
   );
 }
-
-/*
-<form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input type="text" name="username" id="username" />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="text" name="password" id="password" />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-*/
