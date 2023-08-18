@@ -18,7 +18,7 @@ export default function TextField(props: textTypes) {
       />
       <label
         htmlFor={props.inputName.toLowerCase()}
-        className="absolute py-2 px-2 opacity-50 duration-300 transform -translate-y-6 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 "
+        className="absolute py-2 px-2 opacity-50 duration-300 transform -translate-y-6 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 -z-10 origin-[0] peer-focus:scale-75 peer-focus:-translate-y-6"
       >
         {props.inputName}
       </label>
