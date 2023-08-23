@@ -35,6 +35,7 @@ export default function CheckBoxButton({
             ? name.split(' ').join('').slice(0, -1).toLowerCase()
             : name.toLowerCase()
         }
+        className="font-bold"
       >
         {name}
       </label>

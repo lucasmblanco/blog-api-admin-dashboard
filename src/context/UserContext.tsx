@@ -34,24 +34,23 @@ const reducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
     case 'SET_USER_LOG_IN':
       const user = {
-        username: action.payload.username
+        username: action.payload?.username
       };
       localStorage.setItem('user', JSON.stringify(user));
       return {
         user: {
-          username: action.payload.username
+          username: action.payload?.username
         }
       };
     case 'SET_USER_LOCAL':
       return {
         user: {
-          username: action.payload.username
+          username: action.payload?.username
         }
       };
     case 'LOG_OUT_USER':
-      return {
-        user: undefined
-      };
+      localStorage.removeItem('user');
+      return state;
     default:
       return state;
   }

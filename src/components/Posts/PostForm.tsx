@@ -5,7 +5,7 @@ import { PostContext } from '@/context/PostContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { DialogContext } from '@/context/DialogContext';
-import TextField from '../Form/textField';
+import TextField from '../Form/TextField';
 import CheckBoxButton from '../Form/CheckBoxButton';
 
 async function createPost({
@@ -130,13 +130,13 @@ export default function PostForm() {
       </div>
       <div className="flex flex-col grow justify-center">
         <CheckBoxButton
-          name="Publish?"
+          name="PUBLISH"
           initialState={publish}
           setFunction={SetPublish}
           complexName={true}
         />
         <CheckBoxButton
-          name="Update timestamp?"
+          name="UPDATE TIMESTAMP"
           initialState={newTimestamp}
           setFunction={setNewTimestamp}
           complexName={true}
@@ -145,7 +145,7 @@ export default function PostForm() {
       <div className="flex justify-center p-2">
         <button
           type="submit"
-          className="font-bold text-sm text-beige border border-beige px-4 py-1 mx-2 rounded-full hover:bg-beige hover:text-black-brown hover:border-light-beige"
+          className="font-bold text-sm text-beige border border-beige px-4 py-1 mx-2 rounded-full hover:bg-beige hover:text-black-brown hover:border-light-beige transition-all"
         >
           Save
         </button>

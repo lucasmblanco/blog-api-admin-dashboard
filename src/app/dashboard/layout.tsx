@@ -4,7 +4,10 @@ import HeaderContainer from '@/containers/HeaderContainer';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-//import { PostContext } from '@/context/PostContext';
+import MobileMenu from '@/containers/MobileMenu';
+import LogoutButton from '@/components/Buttons/LogoutButton';
+import VerifyContainer from '@/containers/LoadingContainer';
+import CheckingAccess from '@/components/Loading/CheckingAccess';
 
 const queryClient = new QueryClient();
 
@@ -32,17 +35,24 @@ export default function DashboardLayout(props: {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <>
-        {loading ? (
-          <div>Veryfing..........</div>
-        ) : (
-          <>
-            <HeaderContainer />
+      {loading ? (
+        <VerifyContainer loadingMessage="VERIFYING ACCESS">
+          <CheckingAccess />
+        </VerifyContainer>
+      ) : (
+        <>
+          <HeaderContainer />
+          <main className="min-h-[inherit] overflow-x-hidden">
             {props.posts}
-          </>
-        )}
-      </>
+          </main>
+          <MobileMenu>
+            <LogoutButton />
+          </MobileMenu>
+        </>
+      )}
     </QueryClientProvider>
   );
 }
-//
+/*
+
+*/

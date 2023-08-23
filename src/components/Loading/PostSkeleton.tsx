@@ -1,0 +1,7 @@
+import React from 'react';
+
+export default function PostSkeleton() {
+  return (
+    <div className="bg-light-brown text-light-yellow truncate py-7 px-2 rounded-xl font-bold animate-pulse min-h-full"></div>
+  );
+}

@@ -1,13 +1,11 @@
 import React from 'react';
-import BaseForm from '@/components/Form/baseForm';
-import TextField from '@/components/Form/textField';
+import BaseForm from '@/components/Form/BaseForm';
+import TextField from '@/components/Form/TextField';
 import { Toaster, toast } from 'sonner';
-import { FormActionType } from '@/types';
+import { FormActionType, ApiError } from '@/types';
 import axios, { AxiosError } from 'axios';
 
-type Error = {
-  error: string;
-};
+
 
 export default function SingUpForm({
   dispatch
@@ -37,7 +35,7 @@ export default function SingUpForm({
       }
     } catch (err) {
       if (err instanceof AxiosError) {
-        err.response?.data.errors.map((e: Error) => toast.error(e.error));
+        err.response?.data.errors.map((e: ApiError) => toast.error(e.error));
       }
     }
   };

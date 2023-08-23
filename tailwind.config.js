@@ -3,14 +3,13 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    //'./src/components/Posts/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/containers/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
     extend: {
       fontFamily: {
-        outfit: ['var(--font-outfit)']
+        newsreader: ['var(--font-newsreader)']
       },
       colors: {
         beige: 'hsl(32, 45%, 76%)',

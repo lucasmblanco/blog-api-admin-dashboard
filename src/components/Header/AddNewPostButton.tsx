@@ -12,7 +12,7 @@ export default function AddNewPostButton() {
     <div>
       <button
         onClick={handleClick}
-        className="font-bold text-sm border border-black-brown px-4 py-1 mx-2 rounded-full hover:bg-light-brown hover:text-beige hover:border-soft-brown"
+        className="font-bold text-sm border border-black-brown px-4 py-1 mx-2 rounded-full hover:bg-light-brown active:bg-light-brown active:text-beige hover:text-beige hover:border-soft-brown transition-all"
       >
         New
       </button>

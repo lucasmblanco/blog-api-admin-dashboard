@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useRef } from 'react';
 import PostForm from './PostForm';
 import Post from './Post';
 import { DialogContext } from '@/context/DialogContext';
+import Image from 'next/image';
+import closeCircle from '../../../public/close-circle.svg';
+import editIcon from '../../../public/edit-icon.svg';
 
 const views: CurrentViewType = {
   post: <Post />,
@@ -45,15 +48,21 @@ export default function PostDialog({
         <div className="flex justify-end p-2 gap-2">
           {!hideFormButton && (
             <button onClick={() => dispatch({ type: 'CHANGE_VIEW' })}>
-              <svg viewBox="0 0 100 100" width="10" className="fill-soft-brown">
-                <circle cx="50" cy="50" r="50" />
-              </svg>
+              <Image
+                src={editIcon}
+                alt="edit icon"
+                width={20}
+                className="hover:bg-soft-brown rounded-full transition-all p-1"
+              />
             </button>
           )}
           <button onClick={handleButton}>
-            <svg viewBox="0 0 100 100" width="10" className="fill-red-500">
-              <circle cx="50" cy="50" r="50" />
-            </svg>
+            <Image
+              src={closeCircle}
+              alt="close circle icon"
+              width={20}
+              className="hover:bg-soft-brown rounded-full transition-all"
+            />
           </button>
         </div>
         {views[state.currentView]}

@@ -1,15 +1,12 @@
 'use client';
 import React, { useContext, useEffect } from 'react';
-import BaseForm from '@/components/Form/baseForm';
-import TextField from '@/components/Form/textField';
+import BaseForm from '@/components/Form/BaseForm';
+import TextField from '@/components/Form/TextField';
 import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/UserContext';
 import { Toaster, toast } from 'sonner';
 import axios, { AxiosError } from 'axios';
-
-type Error = {
-  error: string;
-};
+import { ApiError } from '@/types';
 
 export default function LogInForm({
   notification
@@ -20,6 +17,7 @@ export default function LogInForm({
   const router = useRouter();
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.stopPropagation();
     e.preventDefault();
     const data = {
       username: e.target.username.value,
@@ -43,7 +41,7 @@ export default function LogInForm({
       }
     } catch (err) {
       if (err instanceof AxiosError) {
-        err.response?.data.errors.map((e: Error) => toast.error(e.error));
+        err.response?.data.errors.map((e: ApiError) => toast.error(e.error));
       }
     }
   };

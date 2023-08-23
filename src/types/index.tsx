@@ -2,11 +2,11 @@ export type SubmitFunction = (e: React.ChangeEvent<HTMLFormElement>) => void;
 
 export type ActionType = {
   type: 'SET_USER_LOG_IN' | 'LOG_OUT_USER' | 'SET_USER_LOCAL';
-  payload: UserType;
+  payload?: UserType;
 };
 
 export type UserType = {
-  username: string;
+  username: string | undefined;
 };
 
 export type FormActionType = {
@@ -33,4 +33,8 @@ export type PostComponentType = {
 export type DialogComponentType = {
   isDialogOpen?: boolean;
   currentView: string;
+};
+
+export type ApiError = {
+  error: string;
 };
