@@ -1,6 +1,14 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
+import MobileMenu from '@/containers/MobileMenu';
+import LogoutButton from '@/components/Buttons/LogoutButton';
 
 export default function DashboardPage() {
-  return <></>;
+  return (
+    <>
+      <MobileMenu>
+        <LogoutButton />
+      </MobileMenu>
+    </>
+  );
 }

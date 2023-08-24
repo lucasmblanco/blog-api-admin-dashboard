@@ -8,7 +8,6 @@ import Image from 'next/image';
 
 export default function LogoutButton() {
   const { dispatch } = useContext(UserContext);
-  const router = useRouter();
   async function handleLogout() {
     try {
       const response = await axios.post(

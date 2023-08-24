@@ -50,10 +50,16 @@
   }
 }
 
+
 body {
   color: var(--font-color);
   background: var(--background-color);
-  display: grid;
   overflow-y: hidden;
-  min-height: 100dvh;
+}
+
+
+@media (min-width: 768px) { 
+  body{
+    overflow-y: auto;
+  }
 }

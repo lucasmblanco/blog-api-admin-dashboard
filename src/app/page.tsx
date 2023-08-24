@@ -11,8 +11,7 @@ import { motion as m } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/UserContext';
-import VerifyContainer from '@/containers/LoadingContainer';
-import CheckingAccess from '@/components/Loading/CheckingAccess';
+import orangeBg from '../../public/orange-bg.jpg';
 
 type CurrentViewType = {
   [key: string]: {
@@ -58,15 +57,25 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <main className="flex flex-col items-center justify-center px-12">
+    <main className="grid grid-cols-[2fr_1fr] overflow-y-hidden min-h-[100dvh]">
+      <div className="hidden md:block relative">
+        <Image
+          src={orangeBg}
+          alt=""
+          fill={true}
+          objectFit="cover"
+          className=" h-full"
+          placeholder="blur"
+        />
+      </div>
+      <section className="grid place-content-center px-12 min-w-[100vw] md:min-w-[auto]">
         <div className="grid w-full gap-8">
           <AnimatePresence key={formState.selectedForm}>
             <m.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.75 }}
-              className="text-center font-newsreader w-full font-bold text-3xl "
+              className="text-center font-newsreader w-full font-bold text-3xl"
             >
               {currentView[formState.selectedForm].mainText}
             </m.h1>
@@ -80,27 +89,27 @@ export default function Home() {
           </figure>
           {currentView[formState.selectedForm].node}
         </div>
-      </main>
-      <AnimatePresence key={formState.selectedForm}>
-        <m.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.75 }}
-          className="flex mt-auto justify-center"
-        >
-          <span className="p-1">
-            {currentView[formState.selectedForm].linkMessage}
-          </span>
-          <button
-            onClick={() => {
-              formDispatch({ type: 'CHANGE_VIEW' });
-            }}
-            className="font-newsreader font-bold text-center px-1 hover:text-black-brown hover:bg-beige hover:rounded-full active:text-black-brown active:bg-beige active:rounded-full"
+        <AnimatePresence key={formState.selectedForm}>
+          <m.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.75 }}
+            className="flex justify-center text-xs py-4"
           >
-            {currentView[formState.selectedForm].text}
-          </button>
-        </m.div>
-      </AnimatePresence>
-    </>
+            <span className="p-1">
+              {currentView[formState.selectedForm].linkMessage}
+            </span>
+            <button
+              onClick={() => {
+                formDispatch({ type: 'CHANGE_VIEW' });
+              }}
+              className="font-newsreader font-bold text-center px-1 hover:text-black-brown hover:bg-beige hover:rounded-full active:text-black-brown active:bg-beige active:rounded-full"
+            >
+              {currentView[formState.selectedForm].text}
+            </button>
+          </m.div>
+        </AnimatePresence>
+      </section>
+    </main>
   );
 }

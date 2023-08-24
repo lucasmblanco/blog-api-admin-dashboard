@@ -31,9 +31,9 @@ export default function PostPage() {
     return 'An error has occurred: ' + postQuery.error.message;
 
   return (
-    <div className="flex overflow-x-auto snap-x ">
+    <>
       <PostColumns data={postQuery.data} title="PUBLISHED" />
       <PostColumns data={postQuery.data} title="HIDDEN" published={false} />
-    </div>
+    </>
   );
 }

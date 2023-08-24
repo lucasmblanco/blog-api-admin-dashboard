@@ -27,14 +27,14 @@ export default function PostColumns({
         Number(new Date(b.timestamp)) - Number(new Date(a.timestamp))
     );
   return (
-    <section className="basis-full shrink-0 snap-center overflow-y-scroll px-4">
+    <section className="basis-full shrink-0 snap-center overflow-y-hidden px-4 ">
       <div className="flex gap-1 py-2">
         <svg viewBox="0 0 100 100" width="10" className="fill-green-500">
           <circle cx="50" cy="50" r="40" />
         </svg>
         <h2 className="font-bold">{`${title} (${filteredData.length})`} </h2>
       </div>
-      <div className="grid gap-4 max-h-[100vh] overflow-y-scroll">
+      <div className="grid gap-4 max-h-[100vh] overflow-y-auto ">
         {filteredData.map((post: PostType) => (
           <PostProvider key={post._id}>
             <PostContainer postData={post} />

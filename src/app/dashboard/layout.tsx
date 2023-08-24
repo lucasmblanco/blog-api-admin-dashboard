@@ -4,8 +4,7 @@ import HeaderContainer from '@/containers/HeaderContainer';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import MobileMenu from '@/containers/MobileMenu';
-import LogoutButton from '@/components/Buttons/LogoutButton';
+
 import VerifyContainer from '@/containers/LoadingContainer';
 import CheckingAccess from '@/components/Loading/CheckingAccess';
 
@@ -40,15 +39,13 @@ export default function DashboardLayout(props: {
           <CheckingAccess />
         </VerifyContainer>
       ) : (
-        <>
+        <div className="max-h-[100dvh] md:flex md:max-h-[100vh]">
           <HeaderContainer />
-          <main className="min-h-[inherit] overflow-x-hidden">
+          <main className="min-h-[inherit] flex-grow flex  snap-x md:grid md:grid-cols-2 md:grow-1flex overflow-x-auto md:grow-1 md:p-10">
             {props.posts}
           </main>
-          <MobileMenu>
-            <LogoutButton />
-          </MobileMenu>
-        </>
+         {props.children}
+        </div>
       )}
     </QueryClientProvider>
   );

@@ -19,7 +19,7 @@ export default function MobileMenu({
   return (
     <AnimatePresence>
       <div
-        className="flex flex-col-reverse fixed bottom-0 right-0 items-center"
+        className="flex flex-col-reverse fixed bottom-0 right-0 items-center md:hidden"
         ref={container}
       >
         <m.button
