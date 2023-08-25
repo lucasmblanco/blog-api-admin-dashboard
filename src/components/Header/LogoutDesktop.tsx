@@ -26,9 +26,9 @@ export default function LogoutDesktop() {
   return (
     <button
       onClick={handleLogout}
-      className="relative hidden md:block bg-red-800 rounded p-2 cursor-pointer border-red-600 hover:bg-red-600 active:bg-red-600"
+      className="relative hidden md:block bg-red-800 rounded p-3 cursor-pointer border-red-600 hover:bg-red-600 active:bg-red-600"
     >
-      <Image src={LogoutIcon} alt="" width={30} />
+      <Image src={LogoutIcon} alt="" width={20} />
     </button>
   );
 }

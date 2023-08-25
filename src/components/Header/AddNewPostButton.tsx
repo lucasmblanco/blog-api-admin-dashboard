@@ -13,10 +13,10 @@ export default function AddNewPostButton() {
   return (
     <>
       <button
-        className="relative hidden md:block bg-transparent/20 rounded p-2 cursor-pointer "
+        className="relative hidden md:block bg-transparent/20 rounded p-3 cursor-pointer hover:bg-transparent/40"
         onClick={handleClick}
       >
-        <Image src={newIcon} alt="" width={30} />
+        <Image src={newIcon} alt="" width={20} />
       </button>
       <div className="md:hidden">
         <button

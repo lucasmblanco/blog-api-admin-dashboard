@@ -4,9 +4,10 @@ import HeaderContainer from '@/containers/HeaderContainer';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
+import { DeleteProvider } from '@/context/DeleteContext';
 import VerifyContainer from '@/containers/LoadingContainer';
 import CheckingAccess from '@/components/Loading/CheckingAccess';
+import AditionalContainer from '@/containers/AditionalContainer';
 
 const queryClient = new QueryClient();
 
@@ -39,13 +40,18 @@ export default function DashboardLayout(props: {
           <CheckingAccess />
         </VerifyContainer>
       ) : (
-        <div className="max-h-[100dvh] md:flex md:max-h-[100vh]">
+        <>
           <HeaderContainer />
-          <main className="min-h-[inherit] flex-grow flex  snap-x md:grid md:grid-cols-2 md:grow-1flex overflow-x-auto md:grow-1 md:p-10">
-            {props.posts}
-          </main>
-         {props.children}
-        </div>
+          <DeleteProvider>
+            <div className="grid md:grow">
+              <AditionalContainer />
+              <main className=" flex flex-grow snap-x md:grid md:grid-cols-2 md:grow-1 overflow-x-auto md:grow-1">
+                {props.posts}
+              </main>
+            </div>
+            {props.children}
+          </DeleteProvider>
+        </>
       )}
     </QueryClientProvider>
   );

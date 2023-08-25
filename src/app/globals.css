@@ -54,12 +54,14 @@
 body {
   color: var(--font-color);
   background: var(--background-color);
-  overflow-y: hidden;
+  overflow-y: hidden; 
 }
 
 
 @media (min-width: 768px) { 
   body{
-    overflow-y: auto;
+   overflow-y: auto; 
+   display: flex;
+   max-height: 100vh;
   }
 }

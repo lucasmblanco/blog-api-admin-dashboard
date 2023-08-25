@@ -5,6 +5,7 @@ import { DialogContext } from '@/context/DialogContext';
 import Image from 'next/image';
 import closeCircle from '../../../public/close-circle.svg';
 import editIcon from '../../../public/edit-icon.svg';
+import { motion as m, AnimatePresence } from 'framer-motion';
 
 const views: CurrentViewType = {
   post: <Post />,
@@ -16,9 +17,11 @@ type CurrentViewType = {
 };
 
 export default function PostDialog({
-  hideFormButton
+  hideFormButton,
+  id
 }: {
   hideFormButton?: boolean;
+  id: string;
 }) {
   const { state, dispatch } = useContext(DialogContext);
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -51,8 +54,8 @@ export default function PostDialog({
               <Image
                 src={editIcon}
                 alt="edit icon"
-                width={20}
-                className="hover:bg-soft-brown rounded-full transition-all p-1"
+                width={30}
+                className="hover:bg-soft-brown rounded-full transition-all p-1 w-5 md:w-8"
               />
             </button>
           )}
@@ -60,8 +63,8 @@ export default function PostDialog({
             <Image
               src={closeCircle}
               alt="close circle icon"
-              width={20}
-              className="hover:bg-soft-brown rounded-full transition-all"
+              width={30}
+              className="hover:bg-soft-brown rounded-full transition-all w-5 md:w-8"
             />
           </button>
         </div>

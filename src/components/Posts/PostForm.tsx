@@ -66,13 +66,17 @@ export default function PostForm() {
   const { dispatch } = useContext(DialogContext);
   const [title, setTitle] = useState(state.title || '');
   const [body, setBody] = useState(state.body || '');
-  const [publish, SetPublish] = useState(state.published || false);
+  const [publish, setPublish] = useState(state.published || false);
   const [newTimestamp, setNewTimestamp] = useState(false);
   const queryClient = useQueryClient();
   const createPostMutation = useMutation({
     mutationFn: createPost,
     onSuccess: () => {
       queryClient.invalidateQueries(['posts']);
+      setTitle('');
+      setBody('');
+      setPublish(false);
+      setNewTimestamp(false);
     }
   });
   const editPostMutation = useMutation({
@@ -132,15 +136,17 @@ export default function PostForm() {
         <CheckBoxButton
           name="PUBLISH"
           initialState={publish}
-          setFunction={SetPublish}
+          setFunction={setPublish}
           complexName={true}
         />
-        <CheckBoxButton
-          name="UPDATE TIMESTAMP"
-          initialState={newTimestamp}
-          setFunction={setNewTimestamp}
-          complexName={true}
-        />
+        {state.timestamp && (
+          <CheckBoxButton
+            name="UPDATE TIMESTAMP"
+            initialState={newTimestamp}
+            setFunction={setNewTimestamp}
+            complexName={true}
+          />
+        )}
       </div>
       <div className="flex justify-center p-2">
         <button
@@ -153,42 +159,3 @@ export default function PostForm() {
     </form>
   );
 }
-
-/*
- <div>
-        <label htmlFor="title" className="font-bold">
-          Title
-        </label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          className="focus:outline-none focus:ring-0 border-0 border-b-[1px] border-beige w-full bg-black-brown"
-        />
-      </div>
-
- <div>
-          <label htmlFor="published">Published</label>
-          <input
-            type="checkbox"
-            name="published"
-            id="published"
-            checked={published}
-            onChange={e => setPublished(e.target.checked)}
-            className="appareance-none bg-black-brown focus:outline-none focus:ring-tan focus:bg-tan checked:ring-0 checked:outline-none rounded"
-          />
-        </div>
-        <div>
-          <label htmlFor="newTimestamp">Update timestamp?</label>
-          <input
-            type="checkbox"
-            name="newTimestamp"
-            id="newTimestamp"
-            checked={newTimestamp}
-            onChange={e => setNewTimestamp(e.target.checked)}
-          />
-        </div>
-
-      */

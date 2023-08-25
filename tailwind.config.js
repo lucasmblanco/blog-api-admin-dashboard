@@ -18,7 +18,8 @@ module.exports = {
         tan: 'hsl(31, 65%, 65%)',
         'light-brown': 'hsl(300, 5%, 17%)',
         'light-yellow': 'hsl(25, 75%, 97%)',
-        'soft-brown': 'hsl(300, 2%, 40%)'
+        'soft-brown': 'hsl(300, 2%, 40%)',
+        crimson: 'hsl(348, 83%, 47%)'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

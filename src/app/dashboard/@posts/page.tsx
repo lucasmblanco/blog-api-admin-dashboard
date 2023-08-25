@@ -20,11 +20,6 @@ export default function PostPage() {
         <ColumnSkeleton />
       </div>
 
-      /*
-      <LoadingContainer loadingMessage="RETRIEVING POSTS">
-        <LoadingPost />
-      </LoadingContainer>
-      */
     );
 
   if (postQuery.error instanceof Error)

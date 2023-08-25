@@ -57,7 +57,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="grid grid-cols-[2fr_1fr] overflow-y-hidden min-h-[100dvh]">
+    <main className="grid grid-cols-[2fr_1fr] overflow-y-hidden min-h-[100dvh] grow">
       <div className="hidden md:block relative">
         <Image
           src={orangeBg}
