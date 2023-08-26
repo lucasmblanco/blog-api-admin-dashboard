@@ -26,8 +26,17 @@ export default function PostPage() {
 
   return (
     <>
-      <PostColumns data={postQuery.data} title="PUBLISHED" />
-      <PostColumns data={postQuery.data} title="HIDDEN" published={false} />
+      <PostColumns
+        data={postQuery.data}
+        title="PUBLISHED"
+        color="fill-green-500"
+      />
+      <PostColumns
+        data={postQuery.data}
+        title="HIDDEN"
+        published={false}
+        color="fill-yellow-500"
+      />
     </>
   );
 }

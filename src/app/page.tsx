@@ -68,7 +68,7 @@ export default function Home() {
           placeholder="blur"
         />
       </div>
-      <section className="grid place-content-center px-12 min-w-[100vw] md:min-w-[auto]">
+      <section className="grid auto-cols-[0.75fr] place-content-center px-12 min-w-[100vw] md:min-w-[auto]">
         <div className="grid w-full gap-8">
           <AnimatePresence key={formState.selectedForm}>
             <m.h1

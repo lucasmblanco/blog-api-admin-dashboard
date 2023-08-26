@@ -17,11 +17,13 @@ type PostType = {
 export default function PostColumns({
   data,
   title,
-  published = true
+  published = true,
+  color
 }: {
   data: any;
   title: string;
   published?: boolean;
+  color: string;
 }) {
   const filteredData = data.posts
     .filter((post: PostType) => post.published === published)
@@ -32,7 +34,7 @@ export default function PostColumns({
   return (
     <section className="flex flex-col basis-full shrink-0 snap-center overflow-y-hidden px-4 items-stretch  my-4 rounded border border-light-brown">
       <div className="flex gap-1 py-2 self-start">
-        <svg viewBox="0 0 100 100" width="10" className="fill-green-500">
+        <svg viewBox="0 0 100 100" width="10" className={`${color}`}>
           <circle cx="50" cy="50" r="40" />
         </svg>
         <h2 className="font-bold ">{`${title} (${filteredData.length})`} </h2>
