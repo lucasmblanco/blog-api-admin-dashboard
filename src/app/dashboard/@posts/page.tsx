@@ -15,11 +15,10 @@ export default function PostPage() {
 
   if (postQuery.isLoading)
     return (
-      <div className="flex snap-x overscroll-x-hidden">
+      <>
         <ColumnSkeleton />
         <ColumnSkeleton />
-      </div>
-
+      </>
     );
 
   if (postQuery.error instanceof Error)

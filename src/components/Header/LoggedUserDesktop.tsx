@@ -16,7 +16,8 @@ export default function LoggedUserDesktop() {
     <div className="hidden md:flex items-center ">
       <div
         className="relative hidden md:block bg-transparent/20 rounded p-3 hover:bg-transparent/40"
-        onMouseOver={handleOver}
+        onMouseEnter={() => setDisplayInfo(true)}
+        onMouseLeave={() => setDisplayInfo(false)}
       >
         <Image src={userIcon} alt="" width={20} />
       </div>

@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { UserContext } from '@/context/UserContext';
 import LogoutIcon from '../../../public/log-out.svg';
 import Image from 'next/image';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { toast } from 'sonner';
 
 export default function LogoutDesktop() {
   const { dispatch } = useContext(UserContext);
@@ -20,7 +21,9 @@ export default function LogoutDesktop() {
         if (window && window.location) window.location.reload();
       }
     } catch (err) {
-      console.log(err);
+      if (err instanceof AxiosError) {
+        toast.error(err.response?.data);
+      }
     }
   }
   return (

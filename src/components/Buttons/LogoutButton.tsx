@@ -1,10 +1,11 @@
 'use client';
 import React, { useContext, useTransition } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import LogoutIcon from '../../../public/log-out.svg';
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 export default function LogoutButton() {
   const { dispatch } = useContext(UserContext);
@@ -22,7 +23,9 @@ export default function LogoutButton() {
         if (window && window.location) window.location.reload();
       }
     } catch (err) {
-      console.log(err);
+      if (err instanceof AxiosError) {
+        toast.error(err.response?.data);
+      }
     }
   }
 

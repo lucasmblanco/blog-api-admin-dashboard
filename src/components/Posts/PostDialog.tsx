@@ -44,7 +44,7 @@ export default function PostDialog({
   return (
     <dialog
       className="absolute left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] z-[1055] bg-light-brown text-light-yellow backdrop:backdrop-blur
-      rounded-xl border-[1px] border-soft-brown min-h-[90vh] min-w-[90vw]"
+      rounded-xl border-[1px] border-soft-brown min-h-[90vh] min-w-[90vw] "
       ref={modalRef}
     >
       <div className="flex flex-col w-full min-h-[90vh]">
