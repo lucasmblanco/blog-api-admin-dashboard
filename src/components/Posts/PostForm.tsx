@@ -159,7 +159,7 @@ export default function PostForm() {
             init={{
               id: 'body',
               textareaName: 'body',
-              height: 500
+              height: 500,
             }}
             value={body}
           />

@@ -1,8 +1,8 @@
-//import "./globals.css";
 import type { Metadata } from 'next';
 import { Inter, Newsreader } from 'next/font/google';
 import { UserProvider } from '@/context/UserContext';
 import './globals.css';
+import { FormProvider } from '@/context/FormContext';
 const inter = Inter({ subsets: ['latin'] });
 const newreader = Newsreader({
   weight: ['200', '300', '400', '500', '600', '700', '800'],
@@ -24,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${newreader.variable}`}>
       <UserProvider>
-        <body className={inter.className}>{children}</body>
+        <FormProvider>
+          <body className={inter.className}>{children}</body>
+        </FormProvider>
       </UserProvider>
     </html>
   );

@@ -1,63 +1,18 @@
 'use client';
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import BaseForm from '@/components/Form/BaseForm';
 import TextField from '@/components/Form/TextField';
-import { useRouter } from 'next/navigation';
-import { UserContext } from '@/context/UserContext';
-import { Toaster, toast } from 'sonner';
-import axios, { AxiosError } from 'axios';
-import { ApiError } from '@/types';
 
-export default function LogInForm({
-  notification
-}: {
-  notification: string | undefined;
-}) {
-  const { dispatch } = useContext(UserContext);
-  const router = useRouter();
+import useLogin from '@/hooks/loginHook';
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.stopPropagation();
-    e.preventDefault();
-    const data = {
-      username: e.target.username.value,
-      password: e.target.password.value
-    };
-
-    try {
-      const response = await axios.post(
-        'https://blog-api-ol7v.onrender.com/v1/admin/login',
-        data,
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      );
-      if (response.status === 200) {
-        router.push('/dashboard');
-        dispatch({ type: 'SET_USER_LOG_IN', payload: response.data.user });
-      }
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        err.response?.data.errors.map((e: ApiError) => toast.error(e.error));
-      }
-    }
-  };
-  useEffect(() => {
-    if (notification !== undefined) {
-      toast(notification);
-    }
-  }, [notification]);
-
+export default function LogInForm() {
+  const { handleSubmit } = useLogin();
   return (
     <>
       <BaseForm onSubmit={handleSubmit} submitButtonText="Log in">
         <TextField inputName="Username" type="text" />
         <TextField inputName="Password" type="password" />
       </BaseForm>
-      <Toaster />
     </>
   );
 }

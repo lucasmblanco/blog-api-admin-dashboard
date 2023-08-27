@@ -49,4 +49,3 @@ export const PostProvider = ({ children }: { children: React.ReactNode }) => {
     </PostContext.Provider>
   );
 };
-
