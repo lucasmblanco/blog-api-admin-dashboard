@@ -17,11 +17,9 @@ type CurrentViewType = {
 };
 
 export default function PostDialog({
-  hideFormButton,
-  id
+  hideFormButton
 }: {
   hideFormButton?: boolean;
-  id: string;
 }) {
   const { state, dispatch } = useContext(DialogContext);
   const modalRef = useRef<HTMLDialogElement>(null);

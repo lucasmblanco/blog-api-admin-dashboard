@@ -31,7 +31,7 @@ export default function PostContainer({ postData }: { postData: PostType }) {
     <>
       <DialogProvider>
         <PostCard author={postData.author} />
-        <PostDialog id={postData._id} />
+        <PostDialog />
       </DialogProvider>
     </>
   );
