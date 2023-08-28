@@ -12,7 +12,7 @@ export default function CheckBoxButton({
   complexName?: boolean;
 }) {
   return (
-    <div className="flex  p-4 rounded bg-black-brown gap-3 justify-center ">
+    <div className="flex  p-4 rounded-lg bg-black-brown gap-3 justify-center ">
       <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
         {name}
       </span>

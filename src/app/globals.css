@@ -28,6 +28,8 @@
   #root, #__next {
     isolation: isolate;
   }
+
+
 }
 @tailwind components;
 @tailwind utilities;
@@ -38,6 +40,8 @@
   --font-color: hsl(300, 3%, 12%);
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  
 }
 
 @media (prefers-color-scheme: dark) {
@@ -63,5 +67,7 @@ body {
    overflow-y: auto; 
    display: flex;
    max-height: 100vh;
+  
   }
 }
+

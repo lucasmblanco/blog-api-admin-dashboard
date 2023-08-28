@@ -4,8 +4,6 @@ import PostCard from '@/components/Posts/PostCard';
 import { PostContext } from '@/context/PostContext';
 import PostDialog from '@/components/Posts/PostDialog';
 import { DialogProvider } from '@/context/DialogContext';
-import { PostComponentType } from '@/types';
-import { AnimatePresence } from 'framer-motion';
 
 type PostType = {
   _id: string;

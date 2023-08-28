@@ -32,7 +32,7 @@ export default function PostColumns({
         Number(new Date(b.timestamp)) - Number(new Date(a.timestamp))
     );
   return (
-    <section className="flex flex-col basis-full shrink-0 snap-center overflow-y-hidden px-4 items-stretch  my-4 rounded border border-light-brown">
+    <section className="flex flex-col basis-full shrink-0 snap-center overflow-y-hidden px-4 items-stretch my-4 rounded-lg border border-light-brown">
       <div className="flex gap-1 py-2 self-start">
         <svg viewBox="0 0 100 100" width="10" className={`${color}`}>
           <circle cx="50" cy="50" r="40" />

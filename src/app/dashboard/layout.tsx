@@ -45,7 +45,7 @@ export default function DashboardLayout(props: {
           <DeleteProvider>
             <div className="flex flex-col w-full">
               <AditionalContainer />
-              <main className=" flex flex-grow snap-x md:grid md:grid-cols-2 md:grow-1 overflow-x-auto md:grow-1 ">
+              <main className=" flex flex-grow snap-x md:grid md:grid-cols-2 md:grow overflow-x-auto ">
                 {props.posts}
               </main>
             </div>
