@@ -1,11 +1,11 @@
 import React from 'react';
 import { SubmitFunction } from '@/types';
-import { motion as m, AnimatePresence } from 'framer-motion';
 
 type FormProps = {
   onSubmit: SubmitFunction;
   submitButtonText: string;
   children?: React.ReactNode;
+  isLoading: boolean;
 };
 
 export default function BaseForm(props: FormProps) {

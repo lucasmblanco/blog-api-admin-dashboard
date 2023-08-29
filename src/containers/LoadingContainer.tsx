@@ -10,7 +10,7 @@ export default function LoadingContainer({
   return (
     <div className="grid place-content-center items-center">
       {children}
-      <p className="text-2xl font-bold">{loadingMessage}</p>
+      <p className="text-2xl font-bold font-newsreader">{loadingMessage}</p>
     </div>
   );
 }

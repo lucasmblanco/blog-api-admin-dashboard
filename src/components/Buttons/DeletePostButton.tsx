@@ -1,19 +1,12 @@
-import React, { ButtonHTMLAttributes, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { PostContext } from '@/context/PostContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { DeleteContext } from '@/context/DeleteContext';
 import Image from 'next/image';
 import deleteIcon from '../../../public/delete-icon.svg';
 import { motion as m, AnimatePresence } from 'framer-motion';
-
-async function deletePost({ id }: { id: string }) {
-  return axios
-    .delete(`https://blog-api-ol7v.onrender.com/v1/posts/${id}`, {
-      withCredentials: true
-    })
-    .then(res => res.data);
-}
+import { deletePost } from '@/services/postServices';
+import { toast } from 'sonner';
 
 const variants = {
   visible: { opacity: 1 },
@@ -35,6 +28,16 @@ export default function DeletePostButton() {
     e.stopPropagation();
     deletePostMutation.mutate({ id: state.id });
   }
+
+  useEffect(() => {
+    if (deletePostMutation.isLoading) {
+      toast('Deleting post....');
+    }
+    if (deletePostMutation.isSuccess && deletePostMutation.data) {
+      toast.dismiss();
+      toast.success(deletePostMutation.data.message);
+    }
+  }, [deletePostMutation]);
 
   return (
     <div className="grid place-content-center">

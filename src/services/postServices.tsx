@@ -32,8 +32,10 @@ export async function createPost({
   } catch (err) {
     if (err instanceof AxiosError) {
       if (err.response?.data.errors.length > 0) {
+        toast.dismiss();
         err.response?.data.errors.map((e: ApiError) => toast.error(e.error));
       } else {
+        toast.dismiss();
         toast.error(err.response?.data);
       }
     }
@@ -75,8 +77,33 @@ export async function editPost({
   } catch (err) {
     if (err instanceof AxiosError) {
       if (err.response?.data.errors.length > 0) {
+        toast.dismiss();
         err.response?.data.errors.map((e: ApiError) => toast.error(e.error));
       } else {
+        toast.dismiss();
+        toast.error(err.response?.data);
+      }
+    }
+  }
+}
+
+export async function deletePost({ id }: { id: string }) {
+  try {
+    const response = await axios.delete(
+      `https://blog-api-ol7v.onrender.com/v1/posts/${id}`,
+      {
+        withCredentials: true
+      }
+    );
+    const responseData = await response.data;
+    return responseData;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      if (err.response?.data.errors.length > 0) {
+        toast.dismiss();
+        err.response?.data.errors.map((e: ApiError) => toast.error(e.error));
+      } else {
+        toast.dismiss();
         toast.error(err.response?.data);
       }
     }

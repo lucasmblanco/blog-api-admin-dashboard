@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createPost, editPost } from '../services/postServices';
 import { DialogContext } from '@/context/DialogContext';
 import usePostForm from './PostFormHook';
 import { PostComponentType } from '@/types';
+import { toast } from 'sonner';
 
 export default function usePostMutation(state: PostComponentType) {
   const {
@@ -26,7 +27,8 @@ export default function usePostMutation(state: PostComponentType) {
       setBody('');
       setPublish(false);
       setNewTimestamp(false);
-    }
+    },
+    onError: (error: any) => console.log(error)
   });
   const editPostMutation = useMutation({
     mutationFn: editPost,
@@ -53,6 +55,27 @@ export default function usePostMutation(state: PostComponentType) {
     }
     dispatch({ type: 'TOGGLE_DIALOG_DEFAULT' });
   };
+
+  useEffect(() => {
+    if (createPostMutation.isLoading) {
+      toast('Saving post...');
+    }
+    if (createPostMutation.isSuccess && createPostMutation.data) {
+      toast.dismiss();
+      toast.success(createPostMutation.data.message);
+    }
+  }, [createPostMutation]);
+
+  useEffect(() => {
+    if (editPostMutation.isLoading) {
+      toast('Saving post....');
+    }
+    if (editPostMutation.isSuccess && editPostMutation.data) {
+      toast.dismiss();
+      toast.success(editPostMutation.data.message);
+    }
+  }, [editPostMutation]);
+
   return {
     title,
     setTitle,
@@ -62,6 +85,8 @@ export default function usePostMutation(state: PostComponentType) {
     setPublish,
     newTimestamp,
     setNewTimestamp,
-    handleSubmit
+    handleSubmit,
+    createPostMutation,
+    editPostMutation
   };
 }

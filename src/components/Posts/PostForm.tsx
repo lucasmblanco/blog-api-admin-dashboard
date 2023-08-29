@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { PostContext } from '@/context/PostContext';
 import TextField from '../Form/TextField';

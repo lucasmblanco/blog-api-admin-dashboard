@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext, useTransition } from 'react';
+import React, { useContext } from 'react';
 import axios, { AxiosError } from 'axios';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { toast } from 'sonner';
 
 export default function LogoutButton() {
+  const router = useRouter();
   const { dispatch } = useContext(UserContext);
   async function handleLogout() {
     try {
@@ -20,7 +21,7 @@ export default function LogoutButton() {
       );
       if (response.status === 200) {
         dispatch({ type: 'LOG_OUT_USER' });
-        if (window && window.location) window.location.reload();
+        router.push('/');
       }
     } catch (err) {
       if (err instanceof AxiosError) {
