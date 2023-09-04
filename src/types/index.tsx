@@ -10,7 +10,12 @@ export type UserType = {
 };
 
 export type FormActionType = {
-  type: 'CHANGE_VIEW' | 'CHANGE_VIEW_FROM_SIGNUP';
+  type:
+    | 'CHANGE_VIEW'
+    | 'CHANGE_VIEW_FROM_SIGNUP'
+    | 'CLEAN_EMPTY_INPUT_FIELDS'
+    | 'ADD_EMPTY_INPUT_FIELD';
+  payload?: 'username' | 'password';
 };
 
 export type ResponseError = { error: string };

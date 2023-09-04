@@ -1,13 +1,12 @@
-'use client';
 import React from 'react';
 import BaseForm from '@/components/Form/BaseForm';
-import TextField from '@/components/Form/TextField';
+import { TextField } from '@/components/Form/TextField';
 import { AnimatePresence, motion as m } from 'framer-motion';
 
 import useLogin from '@/hooks/loginHook';
 
 export default function LogInForm() {
-  const { handleSubmit } = useLogin();
+  const { onSubmit, handleSubmit, isLoading, register, errors } = useLogin();
   return (
     <AnimatePresence mode="wait">
       <m.div
@@ -16,11 +15,31 @@ export default function LogInForm() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <BaseForm onSubmit={handleSubmit} submitButtonText="Log in">
-          <TextField inputName="Username" type="text" />
-          <TextField inputName="Password" type="password" />
+        <BaseForm
+          onSubmit={handleSubmit(onSubmit)}
+          submitButtonText="Log in"
+          isLoading={isLoading}
+        >
+          <TextField
+            label="username"
+            inputName="username"
+            type="text"
+            {...register('username', { required: true })}
+          />
+          {errors.username && <p>This field is required</p>}
+          <TextField
+            label="password"
+            inputName="password"
+            type="password"
+            {...register('password', { required: true })}
+          />
+          {errors.password && <p>This field is required</p>}
         </BaseForm>
       </m.div>
     </AnimatePresence>
   );
 }
+
+/*
+
+          />*/

@@ -4,7 +4,7 @@ import { AnimatePresence, motion as m } from 'framer-motion';
 import { currentView } from '@/constants/FormOptions';
 
 export default function ChangeFormComponent() {
-  const { formState, formDispatch } = useContext(FormContext);
+  const { selectedFormState, formDispatch } = useContext(FormContext);
   return (
     <AnimatePresence mode="wait">
       <m.div
@@ -15,7 +15,7 @@ export default function ChangeFormComponent() {
         className="flex justify-center text-xs py-4"
       >
         <span className="p-1">
-          {currentView[formState.selectedForm].phrase}
+          {currentView[selectedFormState.selectedForm].phrase}
         </span>
         <button
           onClick={() => {
@@ -23,7 +23,7 @@ export default function ChangeFormComponent() {
           }}
           className="font-newsreader font-bold text-center px-1 hover:text-black-brown hover:bg-beige hover:rounded-full active:text-black-brown active:bg-beige active:rounded-full"
         >
-          {currentView[formState.selectedForm].textButton}
+          {currentView[selectedFormState.selectedForm].textButton}
         </button>
       </m.div>
     </AnimatePresence>

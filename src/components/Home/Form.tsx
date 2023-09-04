@@ -3,6 +3,6 @@ import { currentView } from '@/constants/FormOptions';
 import { FormContext } from '@/context/FormContext';
 
 export default function Form() {
-  const { formState } = useContext(FormContext);
-  return <>{currentView[formState.selectedForm].form}</>;
+  const { selectedFormState } = useContext(FormContext);
+  return <>{currentView[selectedFormState.selectedForm].form}</>;
 }

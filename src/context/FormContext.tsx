@@ -11,14 +11,15 @@ export const INITIAL_FORM: FormType = {
   selectedForm: 'login'
 };
 
+//EMPTY FIELD CHEQUEAR SI ES FALSO PARA PONER UN SPAN REQUERIENDO LO QUE PIDE O TOAST
+
 export const FormContext = createContext<{
-  formState: FormType;
+  selectedFormState: FormType;
   formDispatch: React.Dispatch<FormActionType>;
 }>({
-  formState: INITIAL_FORM,
+  selectedFormState: INITIAL_FORM,
   formDispatch: () => {}
 });
-
 export const reducer = (
   state: FormType = INITIAL_FORM,
   action: FormActionType
@@ -26,24 +27,27 @@ export const reducer = (
   switch (action.type) {
     case 'CHANGE_VIEW':
       return {
+        ...state,
         selectedForm: state.selectedForm == 'login' ? 'signup' : 'login'
       };
     case 'CHANGE_VIEW_FROM_SIGNUP':
       return {
+        ...state,
         selectedForm: 'login',
         notification: 'Proceed with the log in.'
       };
+
     default:
       return state;
   }
 };
 
 export const FormProvider = ({ children }: { children: React.ReactNode }) => {
-  const [formState, formDispatch] = useReducer<
+  const [selectedFormState, formDispatch] = useReducer<
     React.Reducer<FormType, FormActionType>
   >(reducer, INITIAL_FORM);
   return (
-    <FormContext.Provider value={{ formState, formDispatch }}>
+    <FormContext.Provider value={{ selectedFormState, formDispatch }}>
       {children}
     </FormContext.Provider>
   );
