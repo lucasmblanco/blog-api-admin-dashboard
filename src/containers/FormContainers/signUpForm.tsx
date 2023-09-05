@@ -20,17 +20,19 @@ export default function SingUpForm() {
           isLoading={isLoading}
         >
           <TextField
-            {...register('username', { required: true })}
             label="username"
             inputName="username"
             type="text"
+            register={register}
+            required
           />
           {errors.username && <p>This field is required</p>}
           <TextField
-            {...register('password', { required: true })}
             label="password"
             inputName="password"
             type="password"
+            register={register}
+            required
           />
           {errors.password && <p>This field is required</p>}
         </BaseForm>

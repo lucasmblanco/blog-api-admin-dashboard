@@ -29,7 +29,6 @@ export default function useSignup() {
   });
 
   function onSubmit(data: UserData) {
-    // e.preventDefault();
     setIsLoading(true);
     const user = {
       username: data.username,

@@ -1,14 +1,17 @@
+/* eslint-disable react/display-name */
 import React from 'react';
+import { UseFormRegister, Path } from 'react-hook-form';
+/*
 
 export default function CheckBoxButton({
   name,
   initialState,
-  setFunction,
+  //setFunction,
   complexName = false
 }: {
   name: string;
-  initialState: boolean;
-  setFunction: (value: boolean) => void;
+  initialState: string | boolean;
+  //setFunction: (value: boolean) => void;
   complexName?: boolean;
 }) {
   return (
@@ -22,14 +25,15 @@ export default function CheckBoxButton({
           className="sr-only peer"
           name={transformValue(name, complexName)}
           id={transformValue(name, complexName)}
-          checked={initialState}
-          onChange={e => setFunction(e.target.checked)}
+          checked={initialState ? true : false}
+          //onChange={e => setFunction(e.target.checked)}
         />
         <div className="w-6 h-3 bg-gray-200 rounded-full peer dark:bg-black-brown peer-focus:ring-1 peer-focus:ring-none dark:peer-focus:ring-soft-brown peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.8 after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-600 peer-checked:bg-tan"></div>
       </label>
     </div>
   );
 }
+*/
 
 function transformValue(value: string, complex: boolean) {
   return complex
@@ -55,3 +59,41 @@ return (
   </div>
 );
 */
+
+type PostData = {
+  title: string;
+  body: string;
+  publish: boolean;
+  newTimestamp: boolean;
+};
+
+interface CheckButtonProps {
+  initialState: string | boolean;
+  complexName: boolean;
+  label: Path<any>;
+  register: UseFormRegister<any>;
+}
+
+export const CheckBoxButton = ({
+  label,
+  register,
+  initialState,
+  complexName
+}: CheckButtonProps) => (
+  <div className="flex  p-4 rounded-lg bg-black-brown gap-3 justify-center ">
+    <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
+      {label}
+    </span>
+    <label className="relative inline-flex items-center mr-5 cursor-pointer">
+      <input
+        type="checkbox"
+        className="sr-only peer"
+        id={transformValue(label, complexName)}
+        defaultChecked={initialState ? true : false}
+        //onChange={e => setFunction(e.target.checked)}
+        {...register(label)}
+      />
+      <div className="w-6 h-3 bg-gray-200 rounded-full peer dark:bg-black-brown peer-focus:ring-1 peer-focus:ring-none dark:peer-focus:ring-soft-brown peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.8 after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-600 peer-checked:bg-tan"></div>
+    </label>
+  </div>
+);

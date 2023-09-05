@@ -7,7 +7,7 @@ import axios, { AxiosError } from 'axios';
 import { ApiError } from '@/types';
 import { toast } from 'sonner';
 import { useMutation } from '@tanstack/react-query';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 type UserData = {
   username: string;
@@ -19,7 +19,8 @@ export default function useLogin() {
   const {
     handleSubmit,
     register,
-    formState: { errors }
+    formState: { errors },
+    watch
   } = useForm<UserData>();
   const [isLoading, setIsLoading] = useState(false);
   const { selectedFormState } = useContext(FormContext);
@@ -34,7 +35,7 @@ export default function useLogin() {
     }
   });
 
-  const onSubmit = async (data: UserData) => {
+  const onSubmit = (data: UserData) => {
     // e.preventDefault();
     setIsLoading(true);
     const user = {
@@ -50,7 +51,7 @@ export default function useLogin() {
       toast(selectedFormState.notification);
     }
   }, [selectedFormState.notification]);
-  return { onSubmit, handleSubmit, isLoading, register, errors };
+  return { onSubmit, handleSubmit, isLoading, register, errors, watch };
 }
 
 async function logInAction({ user }: { user: UserData }) {

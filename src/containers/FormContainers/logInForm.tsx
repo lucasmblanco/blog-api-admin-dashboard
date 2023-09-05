@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import BaseForm from '@/components/Form/BaseForm';
 import { TextField } from '@/components/Form/TextField';
@@ -7,6 +8,7 @@ import useLogin from '@/hooks/loginHook';
 
 export default function LogInForm() {
   const { onSubmit, handleSubmit, isLoading, register, errors } = useLogin();
+
   return (
     <AnimatePresence mode="wait">
       <m.div
@@ -24,14 +26,16 @@ export default function LogInForm() {
             label="username"
             inputName="username"
             type="text"
-            {...register('username', { required: true })}
+            register={register}
+            required
           />
           {errors.username && <p>This field is required</p>}
           <TextField
             label="password"
             inputName="password"
             type="password"
-            {...register('password', { required: true })}
+            register={register}
+            required
           />
           {errors.password && <p>This field is required</p>}
         </BaseForm>
@@ -39,7 +43,3 @@ export default function LogInForm() {
     </AnimatePresence>
   );
 }
-
-/*
-
-          />*/
