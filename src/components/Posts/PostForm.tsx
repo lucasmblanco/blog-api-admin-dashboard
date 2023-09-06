@@ -58,15 +58,13 @@ export default function PostForm() {
             label="publish"
             initialState={state.published}
             //setFunction={setPublish}
-            complexName={true}
             register={register}
           />
           {state.timestamp && (
             <CheckBoxButton
-              label="newTimestamp"
+              label="updateTimestamp"
               initialState={state.timestamp}
               // setFunction={setNewTimestamp}
-              complexName={true}
               register={register}
             />
           )}

@@ -6,18 +6,19 @@ import { PostComponentType } from '@/types';
 import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 
-type PostData = {
+interface PostData {
   title: string;
   body: string;
   publish: boolean;
-  newTimestamp: boolean;
-};
+  updateTimestamp: boolean;
+}
 
 export default function usePostMutation(state: PostComponentType) {
   const {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
     control
   } = useForm<PostData>();
   const { dispatch } = useContext(DialogContext);
@@ -26,14 +27,15 @@ export default function usePostMutation(state: PostComponentType) {
     mutationFn: createPost,
     onSuccess: () => {
       queryClient.invalidateQueries(['posts']);
+      reset({ title: '', body: '', publish: false, updateTimestamp: false });
+
       /*
       setTitle('');
       setBody('');
       setPublish(false);
       setNewTimestamp(false);
       */
-    },
-    onError: (error: any) => console.log(error)
+    }
   });
   const editPostMutation = useMutation({
     mutationFn: editPost,
@@ -55,7 +57,7 @@ export default function usePostMutation(state: PostComponentType) {
         title: data.title,
         body: data.body,
         published: data.publish,
-        timestamp: !data.newTimestamp ? state.timestamp : undefined
+        timestamp: !data.updateTimestamp ? state.timestamp : undefined
       });
     }
     dispatch({ type: 'TOGGLE_DIALOG_DEFAULT' });
@@ -64,35 +66,37 @@ export default function usePostMutation(state: PostComponentType) {
   useEffect(() => {
     if (createPostMutation.isLoading) {
       toast('Saving post...');
+      //console.log('guardandoooo...');
     }
     if (createPostMutation.isSuccess && createPostMutation.data) {
       toast.dismiss();
       toast.success(createPostMutation.data.message);
+      //console.log('guarde el nuevo');
     }
-  }, [createPostMutation]);
+  }, [
+    createPostMutation.isLoading,
+    createPostMutation.data,
+    createPostMutation.isSuccess
+  ]);
 
   useEffect(() => {
     if (editPostMutation.isLoading) {
       toast('Saving post....');
+      // console.log('guardandoooo...');
     }
     if (editPostMutation.isSuccess && editPostMutation.data) {
       toast.dismiss();
       toast.success(editPostMutation.data.message);
+      // console.log('lo editeee');
     }
-  }, [editPostMutation]);
+  }, [
+    editPostMutation.isLoading,
+    editPostMutation.data,
+    editPostMutation.isSuccess
+  ]);
 
   return {
-    //title,
-    //setTitle,
-    //body,
-    //setBody,
-    //publish,
-    // setPublish,
-    //newTimestamp,
-    // setNewTimestamp,
     onSubmit,
-    //createPostMutation,
-    //editPostMutation,
     handleSubmit,
     register,
     errors,

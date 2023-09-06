@@ -39,7 +39,7 @@ export default function PostColumns({
         </svg>
         <h2 className="font-bold ">{`${title} (${filteredData.length})`} </h2>
       </div>
-      <div className="grid gap-4 overflow-y-auto auto-rows-min max-h-[77dvh] md:max-h-none">
+      <div className="grid gap-4 overflow-y-auto auto-rows-min max-h-[77dvh] md:max-h-none scroll-smooth">
         {filteredData.map((post: PostType) => (
           <PostProvider key={post._id}>
             <PostContainer postData={post} />
