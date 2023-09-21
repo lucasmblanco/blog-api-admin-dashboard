@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
+import { Controller } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
 import { PostContext } from '@/context/PostContext';
 import { TextField } from '../Form/TextField';
 import { CheckBoxButton } from '../Form/CheckBoxButton';
 import usePostMutation from '@/hooks/PostMutationHook';
-import { Controller } from 'react-hook-form';
 
 export default function PostForm() {
   const { state } = useContext(PostContext);

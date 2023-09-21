@@ -2,7 +2,7 @@ import React from 'react';
 import { SubmitFunction } from '@/types';
 import loadingIcon from '../../../public/loading-spinner.svg';
 import Image from 'next/image';
-import { AnimatePresence, motion as m } from 'framer-motion';
+import { motion as m } from 'framer-motion';
 
 type FormProps = {
   onSubmit: SubmitFunction;
