@@ -15,7 +15,10 @@ export default function NavigatioBar({
   return (
     <div className="flex justify-end p-2 gap-2">
       {!hideFormButton && (
-        <button onClick={() => dispatch({ type: 'CHANGE_VIEW' })}>
+        <button
+          onClick={() => dispatch({ type: 'CHANGE_VIEW' })}
+          className="outline-none"
+        >
           <Image
             src={editIcon}
             alt=""

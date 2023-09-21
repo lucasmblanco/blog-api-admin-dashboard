@@ -26,7 +26,9 @@ export default function RootLayout({
     <html lang="en" className={`${newreader.variable}`}>
       <UserProvider>
         <FormProvider>
-          <body className={inter.className}>
+          <body
+            className={`flex flex-col h-[100dvh] md:flex-row ${inter.className} `}
+          >
             {children}
             <Toaster />
           </body>
