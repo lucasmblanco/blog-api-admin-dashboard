@@ -11,7 +11,7 @@ export default function useDialog(hideFormButton: boolean) {
 
   useEffect(() => {
     if (hideFormButton) dispatch({ type: 'SELECT_FORM_VIEW' });
-  }, []);
+  }, [dispatch, hideFormButton]);
 
   useEffect(() => {
     if (modalRef.current)

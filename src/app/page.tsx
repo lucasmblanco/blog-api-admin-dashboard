@@ -23,7 +23,7 @@ export default function Home() {
         router.push('/dashboard');
       }
     }
-  }, []);
+  }, [router, state, dispatch]);
 
   return (
     <QueryClientProvider client={client}>

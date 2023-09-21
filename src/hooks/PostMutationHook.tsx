@@ -28,13 +28,6 @@ export default function usePostMutation(state: PostComponentType) {
     onSuccess: () => {
       queryClient.invalidateQueries(['posts']);
       reset({ title: '', body: '', publish: false, updateTimestamp: false });
-
-      /*
-      setTitle('');
-      setBody('');
-      setPublish(false);
-      setNewTimestamp(false);
-      */
     }
   });
   const editPostMutation = useMutation({
@@ -44,7 +37,6 @@ export default function usePostMutation(state: PostComponentType) {
     }
   });
   const onSubmit = (data: PostData) => {
-    //e.preventDefault();
     if (state.id === '') {
       createPostMutation.mutate({
         title: data.title,
@@ -66,12 +58,10 @@ export default function usePostMutation(state: PostComponentType) {
   useEffect(() => {
     if (createPostMutation.isLoading) {
       toast('Saving post...');
-      //console.log('guardandoooo...');
     }
     if (createPostMutation.isSuccess && createPostMutation.data) {
       toast.dismiss();
       toast.success(createPostMutation.data.message);
-      //console.log('guarde el nuevo');
     }
   }, [
     createPostMutation.isLoading,
@@ -82,12 +72,10 @@ export default function usePostMutation(state: PostComponentType) {
   useEffect(() => {
     if (editPostMutation.isLoading) {
       toast('Saving post....');
-      // console.log('guardandoooo...');
     }
     if (editPostMutation.isSuccess && editPostMutation.data) {
       toast.dismiss();
       toast.success(editPostMutation.data.message);
-      // console.log('lo editeee');
     }
   }, [
     editPostMutation.isLoading,

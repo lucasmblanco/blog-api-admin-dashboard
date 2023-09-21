@@ -32,7 +32,7 @@ export default function DashboardLayout(props: {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [dispatch, router, state]);
 
   return (
     <QueryClientProvider client={queryClient}>
